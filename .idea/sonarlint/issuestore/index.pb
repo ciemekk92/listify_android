@@ -15,8 +15,5 @@ j
 :app/src/test/java/com/example/listify/ExampleUnitTest.java,c/c/cc2ebe2ffd58b7465f53c7642b450d593a27583f
 F
 app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
-:
-
-.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 ?
 settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233
