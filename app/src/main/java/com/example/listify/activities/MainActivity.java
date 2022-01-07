@@ -3,18 +3,25 @@ package com.example.listify.activities;
 import android.os.Bundle;
 
 import com.example.listify.R;
+import com.example.listify.model.Priority;
+import com.example.listify.model.Task;
+import com.example.listify.model.TaskViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
+    private TaskViewModel taskViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +30,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        taskViewModel = new ViewModelProvider.AndroidViewModelFactory
+                (MainActivity.this.getApplication())
+                .create(TaskViewModel.class);
+
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
+        fab.setOnClickListener(view -> {
+            Task task = new Task("Test", Priority.HIGH, Calendar.getInstance().getTime(),
+                    Calendar.getInstance().getTime(), false);
+
+            TaskViewModel.insert(task);
         });
     }
 
