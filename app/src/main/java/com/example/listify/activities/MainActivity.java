@@ -24,11 +24,9 @@ import android.view.MenuItem;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "ITEM";
     private TaskViewModel taskViewModel;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
-    private int counter;
     BottomSheetFragment bottomSheetFragment;
 
     @Override
@@ -37,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        counter = 0;
 
         bottomSheetFragment = new BottomSheetFragment();
         ConstraintLayout constraintLayout = findViewById(R.id.bottomSheet);
@@ -59,13 +55,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-//            Task task = new Task("Task " + counter++, Priority.MEDIUM, Calendar.getInstance().getTime(),
-//                    Calendar.getInstance().getTime(), false);
-//
-//            TaskViewModel.insert(task);
-            showBottomSheetDialog();
-        });
+
+        fab.setOnClickListener(view -> showBottomSheetDialog());
     }
 
     private void showBottomSheetDialog() {

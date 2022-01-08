@@ -7,6 +7,7 @@ import com.example.listify.model.Priority;
 import java.util.Date;
 
 public class Converters {
+    private Converters() {}
 
     @TypeConverter
     public static Date fromTimestamp(Long value) {
