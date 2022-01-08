@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/listify_android/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
+        <entry key="..\:/Projects/listify_android/app/src/main/res/layout/bottom_sheet.xml" value="0.36666666666666664" />
+        <entry key="..\:/Projects/listify_android/app/src/main/res/layout/todo_row.xml" value="0.20520833333333333" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/bottom_sheet.xml" value="0.19270833333333334" />
