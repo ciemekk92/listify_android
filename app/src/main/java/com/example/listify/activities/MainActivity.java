@@ -3,9 +3,10 @@ package com.example.listify.activities;
 import android.os.Bundle;
 
 import com.example.listify.R;
+import com.example.listify.adapter.OnTodoClickListener;
 import com.example.listify.adapter.RecyclerViewAdapter;
 import com.example.listify.fragments.BottomSheetFragment;
-import com.example.listify.model.Priority;
+import com.example.listify.model.SharedViewModel;
 import com.example.listify.model.Task;
 import com.example.listify.model.TaskViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -21,13 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.Calendar;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnTodoClickListener {
     private TaskViewModel taskViewModel;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
     BottomSheetFragment bottomSheetFragment;
+    private SharedViewModel sharedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
                 (MainActivity.this.getApplication())
                 .create(TaskViewModel.class);
 
+        sharedViewModel = new ViewModelProvider(this)
+                .get(SharedViewModel.class);
+
         taskViewModel.getAllTasks().observe(this, tasks -> {
-            recyclerViewAdapter = new RecyclerViewAdapter(tasks);
+            recyclerViewAdapter = new RecyclerViewAdapter(tasks, this);
             recyclerView.setAdapter(recyclerViewAdapter);
         });
 
@@ -78,5 +81,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onTodoClick(Task task) {
+        sharedViewModel.selectItem(task);
+        sharedViewModel.setIsEdit(true);
+
+        showBottomSheetDialog();
+    }
+
+    @Override
+    public void onTodoRadioButtonClick(Task task) {
+        TaskViewModel.delete(task);
+        recyclerViewAdapter.notifyDataSetChanged();
     }
 }

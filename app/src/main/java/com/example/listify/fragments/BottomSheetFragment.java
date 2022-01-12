@@ -14,18 +14,22 @@ import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.Group;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.listify.R;
 import com.example.listify.model.Priority;
+import com.example.listify.model.SharedViewModel;
 import com.example.listify.model.Task;
 import com.example.listify.model.TaskViewModel;
+import com.example.listify.util.Utils;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class BottomSheetFragment extends BottomSheetDialogFragment {
+public class BottomSheetFragment extends BottomSheetDialogFragment implements View.OnClickListener {
     private EditText enterTodo;
     private ImageButton calendarButton;
     private ImageButton priorityButton;
@@ -38,6 +42,8 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
 
     private Date dueDate;
     Calendar calendar = Calendar.getInstance();
+    private SharedViewModel sharedViewModel;
+    private boolean isEdit;
 
     public BottomSheetFragment() {
         // Required
@@ -57,20 +63,42 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         priorityRadioGroup = view.findViewById(R.id.radioGroup_priority);
 
         Chip todayChip = view.findViewById(R.id.today_chip);
+        todayChip.setOnClickListener(this);
+
         Chip tomorrowChip = view.findViewById(R.id.tomorrow_chip);
+        tomorrowChip.setOnClickListener(this);
+
         Chip nextWeekChip = view.findViewById(R.id.next_week_chip);
-
-
+        nextWeekChip.setOnClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (sharedViewModel.getSelectedItem().getValue() != null) {
+            isEdit = sharedViewModel.getIsEdit();
+            Task task = sharedViewModel.getSelectedItem().getValue();
+
+            enterTodo.setText(task.getTask());
+        }
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        calendarButton.setOnClickListener(view1 -> calendarGroup.setVisibility(
-                calendarGroup.getVisibility() == View.GONE ? View.VISIBLE : View.GONE));
+        sharedViewModel = new ViewModelProvider(requireActivity())
+                .get(SharedViewModel.class);
+
+        calendarButton.setOnClickListener(view1 -> {
+            calendarGroup.setVisibility(
+                    calendarGroup.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+
+            Utils.hideSoftKeyboard(view1);
+        });
 
         calendarView.setOnDateChangeListener((calendarView, year, month, dayOfMonth) -> {
             calendar.clear();
@@ -87,8 +115,44 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
                         dueDate, Calendar.getInstance().getTime(),
                         false);
 
-                TaskViewModel.insert(newTask);
+                if (isEdit) {
+                    Task updateTask = sharedViewModel.getSelectedItem().getValue();
+                    updateTask.setTask(task);
+                    updateTask.setDateCreated(Calendar.getInstance().getTime());
+                    updateTask.setPriority(Priority.HIGH);
+                    updateTask.setDueDate(dueDate);
+
+                    TaskViewModel.update(updateTask);
+                    sharedViewModel.setIsEdit(false);
+                } else {
+                    TaskViewModel.insert(newTask);
+                }
+                enterTodo.setText("");
+
+                if (this.isVisible()) {
+                    this.dismiss();
+                }
+            } else {
+                Snackbar.make(saveButton, R.string.empty_field, Snackbar.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        calendar = Calendar.getInstance();
+
+        if (id == R.id.today_chip) {
+            calendar.add(Calendar.DAY_OF_YEAR, 0);
+            dueDate = calendar.getTime();
+        } else if (id == R.id.tomorrow_chip) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+            dueDate = calendar.getTime();
+        } else if (id == R.id.next_week_chip) {
+            calendar.add(Calendar.DAY_OF_YEAR, 7);
+            dueDate = calendar.getTime();
+        }
     }
 }

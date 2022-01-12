@@ -17,3 +17,15 @@ F
 app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
 ?
 settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233
+e
+5app/src/main/java/com/example/listify/model/Task.java,8/d/8dafbd056cca2c8ecf7ec8ac89290c5532e385a3
+p
+@app/src/main/java/com/example/listify/util/TaskRoomDatabase.java,2/2/227b794cebd65689bb750439be08b884ebb4eeb4
+q
+Aapp/src/main/java/com/example/listify/data/ListifyRepository.java,3/6/36ebb0584fcc315a3402c7882e71d9256d6f1eb6
+n
+>app/src/main/java/com/example/listify/model/TaskViewModel.java,b/3/b3cc30ee37c73551b57b8b366a2ac80e40a50581
+g
+7app/src/main/java/com/example/listify/data/TaskDao.java,5/9/596b2c5ab3f4a810d75b226fbd4500c869153291
+s
+Capp/src/main/java/com/example/listify/activities/AboutActivity.java,a/7/a7613c1061c4c9f251ffa1ddea6928d514342052
