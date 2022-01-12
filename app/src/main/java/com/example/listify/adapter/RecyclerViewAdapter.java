@@ -1,10 +1,14 @@
 package com.example.listify.adapter;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,13 +39,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Task task = taskList.get(position);
         String formatted = Utils.formatDate(task.getDueDate());
 
+        ColorStateList colorStateList = new ColorStateList(new int[][]{
+                new int[] {-android.R.attr.state_enabled},
+                new int[] {android.R.attr.state_enabled},
+        }, new int[]{
+                Color.LTGRAY,
+                Utils.priorityColor(task)
+        });
+
         holder.task.setText(task.getTask());
         holder.todoChip.setText(formatted);
+
+        holder.todoChip.setTextColor(Utils.priorityColor(task));
+        holder.todoChip.setChipIconTint(colorStateList);
+
+        holder.radioButton.setButtonTintList(colorStateList);
     }
 
     @Override

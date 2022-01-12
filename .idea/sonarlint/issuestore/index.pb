@@ -27,5 +27,3 @@ n
 >app/src/main/java/com/example/listify/model/TaskViewModel.java,b/3/b3cc30ee37c73551b57b8b366a2ac80e40a50581
 g
 7app/src/main/java/com/example/listify/data/TaskDao.java,5/9/596b2c5ab3f4a810d75b226fbd4500c869153291
-s
-Capp/src/main/java/com/example/listify/activities/AboutActivity.java,a/7/a7613c1061c4c9f251ffa1ddea6928d514342052
