@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Listify</string>
+    <string name="action_settings">O aplikacji</string>
+    <string name="first_fragment_label">Pierwszy fragment</string>
+    <string name="second_fragment_label">Drugi fragment</string>
+    <string name="next">Następne</string>
+    <string name="previous">Poprzedne</string>
+    <string name="hello_first_fragment">Heloł, pierwszy fragment</string>
+    <string name="hello_second_fragment">Heloł, drugi fragment. Arg: %1$s</string>
+    <string name="tv_description">Testowanie</string>
+    <string name="tv_title">Tytuł</string>
+    <string name="hello_blank_fragment">Heloł, pusty fragment</string>
+    <string name="enter_todo_hint">Np. wyprowadź psa</string>
+    <string name="today_calendar_button">Dzisiaj</string>
+    <string name="empty_field">Puste zadanie</string>
+    <string name="due_date_text">Data zakończenia</string>
+    <string name="today">Dziś</string>
+    <string name="tomorrow">Jutro</string>
+    <string name="this_wknd">Ten weekend</string>
+    <string name="next_week">Następny tydzień</string>
+    <string name="radio_high">Wysoki</string>
+    <string name="radio_med">Średni</string>
+    <string name="radio_low">Niski</string>
+    <string name="about_text">Listify - Przemyslaw Reducha</string>
+    <string name="add_todos">Dodaj zadanie...</string>
+    <string name="image_description">button obrazek</string>
+</resources>
