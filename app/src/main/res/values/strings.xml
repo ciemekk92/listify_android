@@ -26,4 +26,10 @@
     <string name="image_description">button image</string>
     <string name="about_text">Listify - Przemyslaw Reducha</string>
     <string name="add_todos">Add a Todo...</string>
+    <string name="authentication_error">Authentication error: </string>
+    <string name="authentication_success">Authentication success!</string>
+    <string name="authentication_fail">Authentication failed</string>
+    <string name="biometric_login">Biometric login</string>
+    <string name="biometric_login_subtitle">Login using your fingerprint</string>
+    <string name="biometric_login_password">Use account password</string>
 </resources>

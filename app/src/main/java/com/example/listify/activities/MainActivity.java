@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements OnTodoClickListen
                                               @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
                 Toast.makeText(getApplicationContext(),
-                        "Authentication error: " + errString, Toast.LENGTH_SHORT)
+                        getString(R.string.authentication_error) + errString, Toast.LENGTH_SHORT)
                         .show();
             }
 
@@ -87,22 +87,22 @@ public class MainActivity extends AppCompatActivity implements OnTodoClickListen
                     @NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(),
-                        "Authentication succeeded!", Toast.LENGTH_SHORT).show();
+                        getString(R.string.authentication_success), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();
-                Toast.makeText(getApplicationContext(), "Authentication failed",
+                Toast.makeText(getApplicationContext(), getString(R.string.authentication_fail),
                         Toast.LENGTH_SHORT)
                         .show();
             }
         });
 
         promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Biometric login for my app")
-                .setSubtitle("Log in using your biometric credential")
-                .setNegativeButtonText("Use account password")
+                .setTitle(getString(R.string.biometric_login))
+                .setSubtitle(getString(R.string.biometric_login_subtitle))
+                .setNegativeButtonText(getString(R.string.biometric_login_password))
                 .build();
     }
 

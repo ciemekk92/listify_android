@@ -25,4 +25,10 @@
     <string name="about_text">Listify - Przemyslaw Reducha</string>
     <string name="add_todos">Dodaj zadanie...</string>
     <string name="image_description">button obrazek</string>
+    <string name="authentication_error">Błąd uwierzytelnienia: </string>
+    <string name="authentication_success">Uwierzytelnienie udane!</string>
+    <string name="authentication_fail">Uwierzytelnienie nieudane</string>
+    <string name="biometric_login">Logowanie biometryczne</string>
+    <string name="biometric_login_subtitle">Zaloguj się używając odcisku palca</string>
+    <string name="biometric_login_password">Użyj hasła</string>
 </resources>
